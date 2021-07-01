@@ -1,4 +1,4 @@
-https://github.com/valiantlynx/bot101v2
+git+https://github.com/valiantlynx/bot101v2
 discord==1.7.3
 discord.py==1.7.3
 dnspython==2.1.0
