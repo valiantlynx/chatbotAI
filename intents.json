@@ -1,0 +1,26 @@
+ {"intents" : [
+   {"tag": "greetings",
+    "patterns": ["hello", "hi", "greetings", "hei", "how are you doing?", "what's up?", "good day"],
+    "responses": ["hello!", "hey!","what can i do for you?"]
+   },
+   {"tag": "age",
+    "patterns": ["age", "when were you created?", "how long have you lived?", "tell me your age", "how old are you?", "what's your age?", "how many years are you", "how long is your existence"],
+    "responses": ["19", " 19 years","my owner Gormery is 19 years old"]
+   },
+   {"tag": "goodbye",
+    "patterns": ["cya", "bye", "i am leaving", "goodbye", "see you later", "see ya", "have a good day"],
+    "responses": ["sad to see you go:( !", "goodbye!","see you later", "talk to you later"]
+   },
+   {"tag": "name",
+    "patterns": ["what are you called?", "what is your name?", "name", "can you tell me your name", "who are you?", "how should i call you?", "what should i call you?", "good day"],
+    "responses": ["my name is bot101!", "bot101!","they call me bot101.", "i'm bot101 the assistant og Gormery", "i'm bot101"]
+   },
+   {"tag": "read",
+    "patterns": ["give me a book", "book", "do you have something to read?", "let me read a book", "what do you offer?", "what book do you have?", "show me some books"],
+    "responses": ["i have some custom made docs", "some short_stories","bot101 has Gormery documents from schools"]
+   },
+   {"tag": "stocks",
+     "patterns": ["what companies am i investing in?", "show me some stocks", "Stocks", "stoncs", "shares", "what stocks do i own?", "how are my shares?", "good day to look at stocks"],
+     "responses": ["you own the following stocks: AMC, TSL, WRP"]
+   }
+ ]}
