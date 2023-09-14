@@ -1,4 +1,5 @@
 .dist 
 .vscode
+.venv
 chatbotmodel.h5
 /tmp

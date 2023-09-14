@@ -1,4 +1,3 @@
-git+https://github.com/valiantlynx/chatbotAI
 discord
 discord.py
 dnspython
