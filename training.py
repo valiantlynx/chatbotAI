@@ -3,8 +3,9 @@ import pickle
 import random
 
 import nltk
-nltk.download('punkt')
-nltk.download('wordnet')
+# sometimes nltk.download() is needed to download the packages
+# nltk.download('punkt')
+# nltk.download('wordnet')
 import numpy as np
 from nltk.stem import WordNetLemmatizer
 from keras.layers import Dense, Activation, Dropout
@@ -77,7 +78,7 @@ model.add(Dense(len(train_y[0]), activation='softmax'))
 sgd = SGD(learning_rate=0.01, weight_decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
+hist = model.fit(np.array(train_x), np.array(train_y), epochs=20, batch_size=5, verbose=1)
 model.save('chatbotmodel.h5', hist)
 print("Done")
 
@@ -143,18 +144,23 @@ def get_response(ints, intents_json):
 
 print("GO, Bot is running!")
 
-'''while True:
-    text = input("")
+while True:
+    text = input(" ")
+    print("you: ", text)
     ints = predict_class(text, model)
-    res = get_response(ints, intents)
-    print(res)'''
+    print("ints: ", ints)
+    try:
+        res = get_response(ints, intents)
+        print("valiantlynx_bot: ", res)
+    except IndexError:
+        print("valiantlynx_bot: I don't understand. Please try again.")
 
 def chatbot_response(text):
     ints = predict_class(text, model)
+    print("ints: ", ints)
     res = get_response(ints, intents)
     return res
 
-import tkinter
 from tkinter import *
 
 def send():
@@ -170,7 +176,7 @@ def send():
         Chatlog.yview(END)
 
 base = Tk()
-base.title("Hello")
+base.title("Valiantlynx Bot")
 base.geometry("400x500")
 base.resizable(width=False, height=False)
 
@@ -178,7 +184,7 @@ Chatlog = Text(base, bd=0, bg="white", height="8", width="50", font="Arial")
 Chatlog.config(state=DISABLED)
 scrollbar = Scrollbar(base, command=Chatlog.yview, cursor="heart")
 Chatlog['yscrollcommand'] = scrollbar.set
-SendButton = Button(base, font=("Verdana", 12, 'bold'), text='send', width="12", height=5, bd=0, bg="#32de97", activebackground = "#3c9d9b", fg='#ffffff', command=send)
+SendButton = Button(base, font=("Verdana", 12, 'bold'), text='send', width="12", height=5, bd=0, bg="#31de97", activebackground = "#3b9d9b", fg='#000000', command=send)
 
 
 EntryBox= Text(base, bd=0, bg="white", width="29", height="5", font="Arial")
