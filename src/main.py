@@ -64,8 +64,8 @@ debugpy.listen(("0.0.0.0", 5678))
 # print(len(classes), "classes", classes)
 
 # print(len(words), "unique lemmatized words", words)
-# pickle.dump(words, open('words.pkl', 'wb'))
-# pickle.dump(classes, open('classes.pkl', 'wb'))
+# pickle.dump(words, open('src/words.pkl', 'wb'))
+# pickle.dump(classes, open('src/classes.pkl', 'wb'))
 
 # training = []
 # output_empty = [0] * len(classes)
@@ -103,7 +103,7 @@ debugpy.listen(("0.0.0.0", 5678))
 # model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 # hist = model.fit(np.array(train_x), np.array(train_y), epochs=350, batch_size=5, verbose=1)
-# model.save('chatbotmodel.h5', hist)
+# model.save('src/chatbotmodel.h5', hist)
 # print("Done training!")
 
 # load the trained model and use it for predictions
@@ -121,10 +121,9 @@ lemmatizer = WordNetLemmatizer()
 
 intents = json.loads(open("src/intents.json").read())
 
-words = pickle.load(open("words.pkl", "rb"))
-classes = pickle.load(open("classes.pkl", "rb"))
-model = load_model('chatbotmodel.h5')
-
+words = pickle.load(open("src/words.pkl", "rb"))
+classes = pickle.load(open("src/classes.pkl", "rb"))
+model = load_model('src/chatbotmodel.h5')
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
