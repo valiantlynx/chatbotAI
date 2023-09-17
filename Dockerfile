@@ -1,18 +1,12 @@
-# Use an official Python runtime as the base image
-FROM python:latest
+FROM python:3.11-slim
 
-# Set the working directory in the container to /app
-WORKDIR /app
+WORKDIR /code 
 
-# Copy the requirement.txt file to the container
-COPY requirements.txt .
+COPY ./requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install the packages listed in the requirement.txt file
-RUN python3 -m pip install -r requirements.txt
+COPY ./src ./src
 
-# Copy the rest of the application code to the container
-COPY . .
+EXPOSE 8000
 
-
-# Run the chatbot application
-CMD ["python", "training.py"]
+CMD ["python", "src/training.py", "&&", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

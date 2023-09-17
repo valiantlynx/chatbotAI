@@ -12,3 +12,6 @@ tensorflow
 tensorflow-estimator
 tk
 wikipedia
+fastapi
+uvicorn
+debugpy

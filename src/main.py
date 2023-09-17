@@ -1,21 +1,28 @@
+from typing import Union
+from fastapi import FastAPI
+
+app = FastAPI()
+ 
+import debugpy
+debugpy.listen(("0.0.0.0", 5678))
+
 import json
 import pickle
 import random
 
 import nltk
 # sometimes nltk.download() is needed to download the packages
-# nltk.download('punkt')
-# nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('wordnet')
 import numpy as np
 from nltk.stem import WordNetLemmatizer
 from keras.layers import Dense, Activation, Dropout
 from keras.models import Sequential
 from keras.optimizers import SGD
-# from check_lengths import find_different_lengths
 
 lemmatizer = WordNetLemmatizer()
 
-intents = json.loads(open("intents.json").read())
+intents = json.loads(open("src/intents.json").read())
 
 words = []
 classes = []
@@ -78,7 +85,7 @@ model.add(Dense(len(train_y[0]), activation='softmax'))
 sgd = SGD(learning_rate=0.01, weight_decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-hist = model.fit(np.array(train_x), np.array(train_y), epochs=20, batch_size=5, verbose=1)
+hist = model.fit(np.array(train_x), np.array(train_y), epochs=250, batch_size=5, verbose=1)
 model.save('chatbotmodel.h5', hist)
 print("Done")
 
@@ -94,7 +101,7 @@ from keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
 
-intents = json.loads(open("intents.json").read())
+intents = json.loads(open("src/intents.json").read())
 
 words = pickle.load(open("words.pkl", "rb"))
 classes = pickle.load(open("classes.pkl", "rb"))
@@ -141,20 +148,8 @@ def get_response(ints, intents_json):
             break
     return result
 
-
-print("GO, Bot is running!")
-
-while True:
-    text = input(" ")
-    print("you: ", text)
-    ints = predict_class(text, model)
-    print("ints: ", ints)
-    try:
-        res = get_response(ints, intents)
-        print("valiantlynx_bot: ", res)
-    except IndexError:
-        print("valiantlynx_bot: I don't understand. Please try again.")
-
+        
+'''
 def chatbot_response(text):
     ints = predict_class(text, model)
     print("ints: ", ints)
@@ -194,4 +189,30 @@ Chatlog.place(x=6, y=6, height=386, width=370)
 EntryBox.place(x=128, y=401, height=90, width=265)
 SendButton.place(x=6, y=401, height=90)
 base.mainloop()
+'''
 
+print("GO, Bot is running!")
+def chat(text):
+    while True:
+        #text = input(" ")
+        print("you: ", text)
+        ints = predict_class(text, model)
+        print("ints: ", ints)
+        try:
+            res = get_response(ints, intents)
+            print("valiantlynx_bot: ", res)
+            return res
+        except IndexError:
+            res = "I don't understand. Please try again."
+            print(res)
+            return res
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World1 ass wiper"}
+
+
+@app.get("/chat/{chat_id}")
+async def read_item(chat_id: int, q: Union[str, None] = None):
+    res = chat(q)
+    return {"chat_id": chat_id, "question": q, "response": res}

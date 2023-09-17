@@ -1,5 +1,4 @@
 .dist 
 .vscode
 .venv
-chatbotmodel.h5
-/__pycache__
+/src/__pycache__
