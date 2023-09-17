@@ -11,7 +11,7 @@ from nltk.stem import WordNetLemmatizer
 from keras.layers import Dense, Activation, Dropout
 from keras.models import Sequential
 from keras.optimizers import SGD
-from check_lengths import find_different_lengths
+# from check_lengths import find_different_lengths
 
 lemmatizer = WordNetLemmatizer()
 
@@ -61,7 +61,7 @@ random.shuffle(training)
 
 
 
-find_different_lengths(training) # just for checking. not needed for the code to run
+# find_different_lengths(training) # just for checking. not needed for the code to run
 training = np.array(training, dtype=object)
 
 train_x = list(training[ :, 0])
