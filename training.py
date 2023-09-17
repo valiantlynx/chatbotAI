@@ -3,11 +3,14 @@ import pickle
 import random
 
 import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
 import numpy as np
 from nltk.stem import WordNetLemmatizer
-from tensorflow.keras.layers import Dense, Activation, Dropout
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.optimizers import SGD
+from keras.layers import Dense, Activation, Dropout
+from keras.models import Sequential
+from keras.optimizers import SGD
+from check_lengths import find_different_lengths
 
 lemmatizer = WordNetLemmatizer()
 
@@ -54,9 +57,13 @@ for document in documents:
     training.append([bag, output_row])
 
 random.shuffle(training)
-training = np.array(training)
 
-train_x = list(training[:, 0])
+
+
+find_different_lengths(training) # just for checking. not needed for the code to run
+training = np.array(training, dtype=object)
+
+train_x = list(training[ :, 0])
 train_y = list(training[:, 1])
 print("Training data created")
 
@@ -67,7 +74,7 @@ model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(len(train_y[0]), activation='softmax'))
 
-sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+sgd = SGD(learning_rate=0.01, weight_decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)

@@ -2,4 +2,4 @@
 .vscode
 .venv
 chatbotmodel.h5
-/tmp
+/__pycache__
