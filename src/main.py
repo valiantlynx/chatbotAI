@@ -1,11 +1,14 @@
-from typing import Union
-from fastapi import FastAPI
+from typing import Union, Optional
+from fastapi import FastAPI, Request, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
+    "https://valiantlynx.github.io/htmx-chat/",
+    "https://valiantlynx.github.io",
     "http://localhost",
     "http://localhost:8000",
     "http://127.0.0.1:5500",
@@ -19,6 +22,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/src/static", StaticFiles(directory="src/static"), name="static")
+
+templates = Jinja2Templates(directory="src/templates")
  
 import debugpy
 debugpy.listen(("0.0.0.0", 5678))
@@ -231,8 +238,13 @@ def chat(text):
 def read_root():
     return {"Hello": "World1 ass wiper"}
 
-
-@app.get("/chat/{chat_id}")
-async def read_item(chat_id: int, q: Union[str, None] = None):
+# Notice that you have to pass the request as part of the key-value pairs in the context for Jinja2. So, you also have to declare it in your path operation.
+@app.get("/chat/{chat_id}", response_class=HTMLResponse)
+async def read_item(request: Request, chat_id: int, q: Union[str, None] = None, hx_request: Optional[str] = Header(None)):
     res = chat(q)
-    return {"chat_id": chat_id, "question": q, "response": res}
+    context = {"request": request, "chat_id": chat_id, "q": q, "res": res}
+    if hx_request:
+        return templates.TemplateResponse("bubble.html", context)
+    
+    return  {"chat_id": chat_id, "question": q, "response": res}
+
