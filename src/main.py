@@ -113,6 +113,9 @@ import pickle
 import numpy as np
 
 import nltk
+# sometimes nltk.download() is needed to download the packages
+nltk.download('punkt')
+nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 
 from keras.models import load_model
