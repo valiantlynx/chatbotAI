@@ -16,26 +16,24 @@
         "I'm here to listen and help you through this tough time.",
         "I can sense your anger, and it's valid. Let's talk it out."
       ]
-    }
-,
-{
-  "tag": "happy",
-  "patterns": [
-    "I'm so excited!",
-    "This is amazing news!",
-    "I'm overjoyed!",
-    "I couldn't be happier!",
-    "This is a dream come true!"
-  ],
-  "responses": [
-    "I'm thrilled for you! Your excitement is contagious!",
-    "This is fantastic news! Celebrate and enjoy the moment!",
-    "Your joy makes me happy too! Let's share this happiness together.",
-    "I can feel your happiness through the screen. It's wonderful!",
-    "Dreams do come true, and this is proof of it! Enjoy every bit of it!"
-  ]
-}
-,
+    },
+    {
+      "tag": "happy",
+      "patterns": [
+        "I'm so excited!",
+        "This is amazing news!",
+        "I'm overjoyed!",
+        "I couldn't be happier!",
+        "This is a dream come true!"
+      ],
+      "responses": [
+        "I'm thrilled for you! Your excitement is contagious!",
+        "This is fantastic news! Celebrate and enjoy the moment!",
+        "Your joy makes me happy too! Let's share this happiness together.",
+        "I can feel your happiness through the screen. It's wonderful!",
+        "Dreams do come true, and this is proof of it! Enjoy every bit of it!"
+      ]
+    },
     {
       "tag": "greetings",
       "patterns": [

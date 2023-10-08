@@ -1,3 +1,8 @@
+'''
+this might be part of the final report. im thinking of making the same ai without using the ai library. for now it is not working. i will try to make it work later.
+'''
+
+
 import wikipedia
 import re
 import numpy as np
