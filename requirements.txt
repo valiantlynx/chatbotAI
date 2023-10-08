@@ -16,3 +16,4 @@ fastapi
 uvicorn
 debugpy
 jinja2
+scikit-learn
