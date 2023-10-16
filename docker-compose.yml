@@ -19,7 +19,7 @@ services:
       dockerfile: ./apps/next-web/Dockerfile
     restart: always
     ports:
-      - 3001:3000
+      - 3002:3000
     networks:
       - valiantlynx-turborepo
   express-api:
@@ -29,7 +29,7 @@ services:
       dockerfile: ./apps/express-api/Dockerfile
     restart: always
     ports:
-      - 3002:3001
+      - 3001:3001
     networks:
       - valiantlynx-turborepo
 

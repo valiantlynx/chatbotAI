@@ -36,7 +36,7 @@ COPY turbo.json turbo.json
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
-RUN yarn turbo run build --filter=express-api...
+RUN yarn turbo run build --filter=express-api
 
 FROM base AS runner
 WORKDIR /app
@@ -48,4 +48,4 @@ USER expressjs
 
 COPY --from=installer /app .
 
-CMD node /app/apps/express-api/dist/index.js
+CMD node apps/express-api/dist/index.js
