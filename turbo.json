@@ -15,6 +15,9 @@
     "lint": {
       "dependsOn": ["^build", "^format"]
     },
+    "preview": {
+      "dependsOn": ["^format", "lint", "^build"]
+    },
     "format": {},
     "check-types": {},
     "dev": {

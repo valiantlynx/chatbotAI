@@ -8,7 +8,7 @@ services:
       dockerfile: ./apps/svelte-manga/Dockerfile
     restart: always
     ports:
-      - 5173:5173
+      - 4173:4173
     networks:
       - valiantlynx-turborepo
 

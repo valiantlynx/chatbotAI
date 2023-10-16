@@ -50,11 +50,8 @@ const pingGoogle = async (page: number, url: string) => {
 		});
 	});
 
-
 	// get the pocketbase services credentials
 	const services = await getPocketbase('credentials', {}).then((data) => data.items);
-
-	
 
 	const service = services[0].creds;
 
@@ -63,7 +60,6 @@ const pingGoogle = async (page: number, url: string) => {
 	// index the images
 	await indexer(images, service);
 };
-
 
 // Set up variables for tracking API usage
 const maxIndexingApiCalls = 5;
