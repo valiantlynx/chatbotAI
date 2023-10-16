@@ -14,5 +14,13 @@
     "tsconfig": "workspace:*",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@8.6.10"
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "pnpm@8.6.10",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  }
 }

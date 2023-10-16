@@ -1,20 +1,21 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["PORT"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**", ".svelte-kit/**", ".vercel/**"]
-    },
-    "lint": {
-      "dependsOn": ["^build"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", "public/dist/**", ".svelte-kit/**", ".vercel/**"],
+      "env": ["NEXT_PUBLIC_API_HOST"]
     },
     "test": {
-      "dependsOn": ["build"]
+      "outputs": ["coverage/**"],
+      "dependsOn": []
     },
-    "deploy": {
-      "dependsOn": ["build", "test", "^lint"]
+    "lint": {
+      "dependsOn": ["^build", "^format"]
     },
+    "format": {},
     "check-types": {},
     "dev": {
       "cache": false,
