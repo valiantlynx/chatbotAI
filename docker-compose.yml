@@ -12,6 +12,27 @@ services:
     networks:
       - valiantlynx-turborepo
 
+  next-web:
+    container_name: next-web
+    build:
+      context: .
+      dockerfile: ./apps/next-web/Dockerfile
+    restart: always
+    ports:
+      - 3001:3000
+    networks:
+      - valiantlynx-turborepo
+  express-api:
+    container_name: express-api
+    build:
+      context: .
+      dockerfile: ./apps/express-api/Dockerfile
+    restart: always
+    ports:
+      - 3002:3001
+    networks:
+      - valiantlynx-turborepo
+
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
 networks:

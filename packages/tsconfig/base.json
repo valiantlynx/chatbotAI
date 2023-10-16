@@ -7,7 +7,6 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "allowImportingTsExtensions": false,
     "noEmit": true,
     "inlineSources": false,
     "isolatedModules": true,

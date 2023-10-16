@@ -35,4 +35,5 @@ yarn-error.log*
 # ui
 dist/
 
+.dist
 .vscode
