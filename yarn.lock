@@ -4256,7 +4256,7 @@
     "@pkgr/utils" "^2.3.1"
     "tslib" "^2.5.0"
 
-"tailwind-config@*", "tailwind-config@file:C:\\Users\\Gormery\\Desktop\\stuff-thst-cant-run-on-a-drive\\valiantlynx-turborepo\\packages\\tailwind-config":
+"tailwind-config@file:C:\\Users\\Gormery\\Desktop\\stuff-thst-cant-run-on-a-drive\\valiantlynx-turborepo\\packages\\tailwind-config":
   "resolved" "file:packages/tailwind-config"
   "version" "0.0.0"
 
@@ -4411,7 +4411,7 @@
     "minimist" "^1.2.6"
     "strip-bom" "^3.0.0"
 
-"tsconfig@file:C:\\Users\\Gormery\\Desktop\\stuff-thst-cant-run-on-a-drive\\valiantlynx-turborepo\\packages\\tsconfig":
+"tsconfig@*", "tsconfig@file:C:\\Users\\Gormery\\Desktop\\stuff-thst-cant-run-on-a-drive\\valiantlynx-turborepo\\packages\\tsconfig":
   "resolved" "file:packages/tsconfig"
   "version" "0.0.0"
 

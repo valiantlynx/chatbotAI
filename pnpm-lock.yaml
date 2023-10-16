@@ -110,6 +110,9 @@ importers:
       three:
         specifier: ^0.155.0
         version: 0.155.0
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
       tslib:
         specifier: ^2.4.1
         version: 2.6.2
