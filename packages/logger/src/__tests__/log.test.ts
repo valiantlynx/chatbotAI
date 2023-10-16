@@ -1,6 +1,6 @@
 import { log } from "..";
 
-jest.spyOn(global.console, "log");
+//jest.spyOn(global.console, "log");
 
 describe("logger", () => {
   it("prints a message", () => {
