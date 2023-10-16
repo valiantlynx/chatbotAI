@@ -20,7 +20,7 @@
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "npm@8.19.4",
+  "packageManager": "yarn@1.22.19",
   "usePackagemanager": "yarn@1.22.19 or pnpm@8.6.10 or npm@8.19.4",
   "engines": {
     "node": ">=14.0.0",
