@@ -1,3 +1,4 @@
+# works but is 1.88GB in size 
 FROM node:18-alpine AS base
 
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
@@ -35,27 +36,7 @@ COPY turbo.json turbo.json
 
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
-
-
-# You can adjust the memory limit based on your specific requirements.
-RUN NODE_OPTIONS="--max-old-space-size=8192" yarn turbo run build --filter=svelte-manga --concurrency 2
-
-
-# Create a new stage for the runner
-FROM base AS runner
-WORKDIR /app
-
-# Don't run production as root - add a non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 svelte
-USER svelte
-
-
-# Copy the necessary files from the installer stage
-COPY --from=installer /app/apps/svelte-manga/package.json .
-COPY --from=installer /app/apps/svelte-manga/build /app/build
-
 EXPOSE 3000
 
 # Modify this line to start your SvelteKit application, e.g., run your server.js or the appropriate script.
-CMD [ "node", "build" ]
+CMD [ "yarn", "turbo", "run", "build", "--filter=svelte-manga"  ]
