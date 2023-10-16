@@ -1,6 +1,5 @@
-import type { SiteConfig } from './types/site';
 
-export const site: SiteConfig = {
+export const site = {
 	protocol: process.env.URARA_SITE_PROTOCOL ?? process.env.DEV ? 'http://' : 'https://',
 	domain: process.env.VITE_SITE_URL ?? 'animevariant.com',
 	logo: process.env.VITE_SITE_LOGO ?? '/logo.png',

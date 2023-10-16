@@ -1,13 +1,13 @@
-import type { Icon } from './types/icon';
+
 import { site } from './site';
 
-export const favicon: Icon = {
+export const favicon = {
 	src: site.protocol + site.domain + '/favicon.png',
 	sizes: '48x48',
 	type: 'image/png'
 };
 
-export const any: { [key: number]: Icon } = {
+export const any = {
 	180: {
 		src: site.protocol + site.domain + '/assets/any@180.png',
 		sizes: '180x180',
@@ -25,7 +25,7 @@ export const any: { [key: number]: Icon } = {
 	}
 };
 
-export const maskable: { [key: number]: Icon } = {
+export const maskable = {
 	192: {
 		src: site.protocol + site.domain + '/assets/maskable@192.png',
 		sizes: '192x192',

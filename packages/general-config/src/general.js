@@ -1,14 +1,12 @@
-import type {
-	ThemeConfig,
-	HeaderConfig,
-	FooterConfig,
-	DateConfig,
-	FeedConfig
-} from './types/general';
-
+/**
+ * @file General configuration file
+ * @module general-config/general
+ * @typedef {Object} any
+ * 
+ */
 export const API_BASE_URL = 'https://api.texbab.com';
 
-export const theme: ThemeConfig = [
+export const theme = [
 	{
 		name: 'halloween',
 		text: '🎃 Halloween'
@@ -129,7 +127,7 @@ export const theme: ThemeConfig = [
 	}
 ];
 
-export const menu: any = [
+export const menu = [
 	{
 		img: `${API_BASE_URL}/api/files/eijp9z2zxlgrd4a/rzx50a9wq8sjf5q/0d537318c00611ec84202eb08599686b_a5987812_7e71_11eb_99f8_ea53df50c496_5cc54b47842a7094ebaec2aef0611d_p4L4GTD1XO.png`,
 		title: 'Barne',
@@ -173,7 +171,7 @@ export const menu: any = [
 ];
 
 // the icons are from https://iconify.design
-export const badge: any = [
+export const badge = [
 	{
 		icon: 'mdi:child-toy',
 		title: 'Barne',
@@ -216,7 +214,7 @@ export const badge: any = [
 	}
 ];
 
-export const header: HeaderConfig = {
+export const header = {
 	nav: [
 		{
 			text: 'About',
@@ -229,7 +227,7 @@ export const header: HeaderConfig = {
 	]
 };
 
-export const footer: FooterConfig = {
+export const footer = {
 	nav: [
 		{
 			text: 'Feed',
@@ -254,7 +252,7 @@ export const footer: FooterConfig = {
 	]
 };
 
-export const date: DateConfig = {
+export const date = {
 	locales: 'en-US',
 	options: {
 		year: '2-digit',
@@ -264,4 +262,4 @@ export const date: DateConfig = {
 	}
 };
 
-export const feed: FeedConfig = {};
+export const feed = {};

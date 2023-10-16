@@ -1,24 +1,14 @@
 version: "3"
 
 services:
-  web:
-    container_name: web
+  svelte-manga:
+    container_name: svelte-manga
     build:
       context: .
-      dockerfile: ./apps/web/Dockerfile
+      dockerfile: ./apps/svelte-manga/Dockerfile
     restart: always
     ports:
-      - 3000:3000
-    networks:
-      - valiantlynx-turborepo
-  api:
-    container_name: api
-    build:
-      context: .
-      dockerfile: ./apps/api/Dockerfile
-    restart: always
-    ports:
-      - 3001:3001
+      - 5173:5173
     networks:
       - valiantlynx-turborepo
 
