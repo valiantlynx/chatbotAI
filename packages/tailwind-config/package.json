@@ -7,6 +7,6 @@
   "devDependencies": {
     "tailwindcss": "^3.2.4",
     "daisyui": "^3.6.1",
-    "general-config": "workspace:*"
+    "general-config": "*"
   }
 }
