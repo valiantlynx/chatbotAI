@@ -16,7 +16,7 @@
       "dependsOn": ["^build", "^format"]
     },
     "preview": {
-      "dependsOn": ["^format", "lint", "^build"]
+      "dependsOn": ["^format", "^build"]
     },
     "format": {},
     "check-types": {},
