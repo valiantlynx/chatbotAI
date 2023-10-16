@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "0.0.0",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -11,14 +12,15 @@
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.3",
-    "tsconfig": "workspace:*",
+    "tsconfig": "*",
     "turbo": "latest"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "pnpm@8.6.10",
+  "packageManager": "npm@8.19.4",
+  "usePackagemanager": "yarn@1.22.19 or pnpm@8.6.10 or npm@8.19.4",
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=7.0.0"
