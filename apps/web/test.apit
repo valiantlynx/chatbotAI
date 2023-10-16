@@ -1,0 +1,6 @@
+{
+  "url": "http://localhost:5173/api/get-image?url=https://ww6.manganelo.tv/mangaimage/manga-nt990602.jpg&width=200&height=500",
+  "params": {},
+  "paramsArray": [],
+  "method": "get"
+}
