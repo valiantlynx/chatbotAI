@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "turbo run dev --concurrency 11",
     "lint": "turbo lint",
     "clean": "turbo clean",
     "format": "turbo format",
