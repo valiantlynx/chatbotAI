@@ -5,25 +5,26 @@ class DiscordMessenger:
     def __init__(self, discord_webhook_url):
         self.discord_webhook_url = discord_webhook_url
 
-    def send_message(self, message, color=0x00ff00):
-        self._send_to_discord(message, color)
+    def send_message(self, message, color=0x00ff00, title=str, user=str, avatar_url=str, html_url=str):
+        self._send_to_discord(message, color, title, user, avatar_url, html_url)
 
-    def send_error(self, message):
-        self._send_to_discord(message, 0xff0000)
+    def send_error(self, message, title=str, user=str, avatar_url=str, html_url=str):
+        self._send_to_discord(message, 0xff0000, title, user, avatar_url, html_url)
 
-    def send_warning(self, message):
-        self._send_to_discord(message, 0xffff00)
+    def send_warning(self, message, title=str, user=str, avatar_url=str, html_url=str):
+        self._send_to_discord(message, 0xffff00, title, user, avatar_url, html_url)
 
-    def send_info(self, message):
-        self._send_to_discord(message, 0x0000ff)
+    def send_info(self, message, title=str, user=str, avatar_url=str, html_url=str):
+        self._send_to_discord(message, 0x0000ff, title, user, avatar_url, html_url)
 
-    def _send_to_discord(self, message, color):
+    def _send_to_discord(self, message, color, title=str, user=str, avatar_url=str, html_url=str):
         embed = {
-            "title": "Github Action",
+            "title": title,
             "description": message,
             "color": color,
             "timestamp": datetime.datetime.utcnow().isoformat(),
-            "footer": {"text": "Github Action"},
+            "footer": {user: html_url},
+            "avatar_url": avatar_url
         }
         payload = {"embeds": [embed]}
         response = requests.post(self.discord_webhook_url, json=payload)
@@ -59,17 +60,17 @@ avatar_url = issue_data.get('avatar_url', '')
 html_url = issue_data.get('html_url', '')
 
 # Use the issue details to create a custom message
-custom_message = f"Issue Title: {title}\nIssue Body: {body}\nUser: {user}\n[Link]({html_url})"
+custom_message = f"- {title}\nDescription {body}\nUser: {user}\n[see it here]({html_url})"
 
 # Send a message to Discord
 if issue_type == 'error':
-    discord_messenger.send_error(custom_message)
+    discord_messenger.send_error(custom_message, title, user, avatar_url, html_url)
 elif issue_type == 'warning':
-    discord_messenger.send_warning(custom_message)
+    discord_messenger.send_warning(custom_message, title, user, avatar_url, html_url)
 elif issue_type == 'info':
-    discord_messenger.send_info(custom_message)
+    discord_messenger.send_info(custom_message, title, user, avatar_url, html_url)
 else:
-    discord_messenger.send_message(custom_message)
+    discord_messenger.send_message(custom_message, title, user, avatar_url, html_url)
     
     
 
