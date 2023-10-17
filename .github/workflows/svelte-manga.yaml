@@ -31,6 +31,9 @@ jobs:
   build-and-push-images:
     name: Build Animevariant
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
 
     steps:
     - name: Checkout code
@@ -58,14 +61,17 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-    - name: Login to GitHub Container Registry
+    - name: Login to GitHub Container registry
       if: github.event_name != 'pull_request'
-      uses: docker/login-action@v3
+      uses: docker/login-action@v1
+      env:
+        GITHUB_USER: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GHCR_PAT }}
-      
+        username: $GITHUB_USER
+        password: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Docker meta
       id: docker_meta
       uses: docker/metadata-action@v3
