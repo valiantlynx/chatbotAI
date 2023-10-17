@@ -212,3 +212,16 @@ go to the root of the project
 ```flyctl launch``` to create a new app
 ```flyctl deploy --dockerfile ./apps/breath-first-search/Dockerfile``` to deploy. you can override the dockerfile to deploy a specific app the path is relative to the root of the repo. so might have change your dockerfile. rememter to change it back
 ```flyctl open```
+
+
+  - name: Set up fly
+      uses: superfly/flyctl-actions/setup-flyctl@master
+      with:
+        version: latest
+
+    - name: Deploy Animevariant
+      run: |
+        flyctl auth login -t ${{ secrets.FLY_API_TOKEN }}
+        flyctl deploy --remote-only --image ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
