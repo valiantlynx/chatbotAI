@@ -95,7 +95,7 @@ jobs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
         context: ./apps/breath-first-search/
-        file: Dockerfile
+        file: ./apps/breath-first-search/Dockerfile
 
     - name: Show image digest
       run: |
