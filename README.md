@@ -1,7 +1,5 @@
-# Action Add Labels
-[![actions-workflow-test][actions-workflow-test-badge]][actions-workflow-test]
-[![release][release-badge]][release]
-[![license][license-badge]][license]
+[![Lint Code Base](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/linter.yaml/badge.svg)](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/linter.yaml)
+[![breath-first-search](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/breath-first-search.yaml/badge.svg)](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/breath-first-search.yaml)
 
 # Turborepo Tailwind CSS starter
 
