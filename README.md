@@ -1,3 +1,8 @@
+# Action Add Labels
+[![actions-workflow-test][actions-workflow-test-badge]][actions-workflow-test]
+[![release][release-badge]][release]
+[![license][license-badge]][license]
+
 # Turborepo Tailwind CSS starter
 
 This is an official starter Turborepo.
