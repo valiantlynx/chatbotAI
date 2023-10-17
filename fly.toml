@@ -19,3 +19,6 @@ primary_region = "arn"
 [[mounts]]
   source = "machine_data" 
   destination = "/data"  
+
+[build]
+  image = "docker.io/valiantlynx/svelte-manga:latest"
