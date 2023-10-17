@@ -36,14 +36,30 @@ class DiscordMessenger:
 
 
 import os
+import sys
 
 discord_webhook_url = os.environ['DISCORD_WEBHOOK_URL']
 
 # Create an instance of DiscordMessenger
 discord_messenger = DiscordMessenger(discord_webhook_url)
 
-# Use its methods to send messages
-discord_messenger.send_message("This is an info message.")
-discord_messenger.send_error("This is an error message.")
-discord_messenger.send_warning("This is a warning message.")
-discord_messenger.send_info("This is another info message.")
+# Check if a custom message was provided as a command-line argument
+if len(sys.argv) > 1:
+    custom_message = sys.argv[1]
+    issue_type = sys.argv[2]
+else:
+    custom_message = "No custom message provided."
+
+
+# Send a message to Discord
+if issue_type == 'error':
+    discord_messenger.send_error(custom_message)
+elif issue_type == 'warning':
+    discord_messenger.send_warning(custom_message)
+elif issue_type == 'info':
+    discord_messenger.send_info(custom_message)
+else:
+    discord_messenger.send_message(custom_message)
+    
+    
+

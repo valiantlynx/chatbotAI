@@ -21,7 +21,7 @@ jobs:
             - name: Run script
               working-directory: packages/scripts/python
               run: |
-                  python message_disscord.py
+                  python message_disscord.py "${{ github.event.issue.title }} ${{ github.event.issue.body }} ${{ github.event.issue.user.login }} ${{ github.event.issue.user.avatar_url }} ${{ github.event.issue.html_url }}" "${{ github.event.action }}"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
