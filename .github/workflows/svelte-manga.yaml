@@ -105,9 +105,8 @@ jobs:
     - name: Set up fly
       uses: superfly/flyctl-actions/setup-flyctl@master
       with:
-        version: latest
-  
+        version: latest 
     - name: Deploy Animevariant
-      run: flyctl deploy
+      run: flyctl deploy --remote-only --image valiantlynx/svelte-manga:latest
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
