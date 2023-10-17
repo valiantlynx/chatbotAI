@@ -37,19 +37,29 @@ class DiscordMessenger:
 
 import os
 import sys
+import json
 
 discord_webhook_url = os.environ['DISCORD_WEBHOOK_URL']
 
 # Create an instance of DiscordMessenger
 discord_messenger = DiscordMessenger(discord_webhook_url)
 
-# Check if a custom message was provided as a command-line argument
-if len(sys.argv) > 1:
-    custom_message = sys.argv[1]
+# Parse the JSON input
+try:
+    issue_data = json.loads(sys.argv[1])
     issue_type = sys.argv[2]
-else:
-    custom_message = "No custom message provided."
+except json.JSONDecodeError:
+    issue_data = {}
 
+# Extract issue details
+title = issue_data.get('title', 'No title provided')
+body = issue_data.get('body', 'No body provided')
+user = issue_data.get('user', 'Unknown user')
+avatar_url = issue_data.get('avatar_url', '')
+html_url = issue_data.get('html_url', '')
+
+# Use the issue details to create a custom message
+custom_message = f"Issue Title: {title}\nIssue Body: {body}\nUser: {user}\n[Link]({html_url})"
 
 # Send a message to Discord
 if issue_type == 'error':

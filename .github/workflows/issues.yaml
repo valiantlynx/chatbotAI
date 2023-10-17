@@ -21,7 +21,8 @@ jobs:
             - name: Run script
               working-directory: packages/scripts/python
               run: |
-                  python message_disscord.py "${{ github.event.issue.title }} ${{ github.event.issue.body }} ${{ github.event.issue.user.login }} ${{ github.event.issue.user.avatar_url }} ${{ github.event.issue.html_url }}" "${{ github.event.action }}"
+                    issue_data='{"title": "${{ github.event.issue.title }}", "body": "${{ github.event.issue.body }}", "user": "${{ github.event.issue.user.login }}", "avatar_url": "${{ github.event.issue.user.avatar_url }}", "html_url": "${{ github.event.issue.html_url }}"}'
+                    python message_discord.py "$issue_data" "${{ github.event.action }}"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
