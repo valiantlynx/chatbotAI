@@ -15,3 +15,7 @@ primary_region = "arn"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
+
+[[mounts]]
+  source = "machine_data" 
+  destination = "/data"  

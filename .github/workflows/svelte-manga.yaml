@@ -102,10 +102,12 @@ jobs:
         echo ${{ steps.docker_build.outputs.digest }}
 
       
-    - name: Trigger Deployment
-      if: steps.docker_build.outcome == 'success'
-      uses: octokit/request-action@v2.x
+    - name: Set up fly
+      uses: superfly/flyctl-actions/setup-flyctl@master
       with:
-        route: POST /repos/${{ github.repository }}/actions/workflows/fly.yml/dispatches
-        token: ${{ secrets.GITHUB_TOKEN }}
-        ref: main
+        version: latest
+  
+    - name: Deploy Animevariant
+      run: flyctl deploy --remote-only --image ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
