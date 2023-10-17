@@ -72,7 +72,7 @@ jobs:
       with:
         images: |
           ${{ github.repository }}/svelte-manga
-          ghcr.io/${{ github.repository }}:latest
+          ghcr.io/${{ github.repository }}
         flavor: |
           latest=false
         tags: |
