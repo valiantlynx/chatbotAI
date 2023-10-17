@@ -60,7 +60,7 @@ avatar_url = issue_data.get('avatar_url', '')
 html_url = issue_data.get('html_url', '')
 
 # Use the issue details to create a custom message
-custom_message = f"- {title}\nDescription {body}\nUser: {user}\n[see it here]({html_url})"
+custom_message = f"Issue - **{title}**\n-Description: - {body}\nUser: **{user}**\n[Click Here]({html_url})"
 
 message_data = {
     "title": title,
