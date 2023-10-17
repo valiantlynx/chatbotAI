@@ -21,4 +21,4 @@ primary_region = "arn"
   destination = "/data"  
 
 [build]
-  image = "docker.io/valiantlynx/svelte-manga:latest"
+  dockerfile = "./apps/svelte-manga/Dockerfile"

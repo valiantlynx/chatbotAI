@@ -106,24 +106,8 @@ jobs:
       uses: superfly/flyctl-actions/setup-flyctl@master
       with:
         version: latest
-    
-
-    - name: Build Docker image for fly
-      run: |
-        docker network create valiantlynx-turborepo
-        COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build svelte-manga
-      env:
-        DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-
-        
+  
     - name: Deploy Animevariant
-      run: |
-        docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-        docker tag svelte-manga:latest $DOCKER_HUB_USERNAME/svelte-manga:latest
-        docker push $DOCKER_HUB_USERNAME/svelte-manga:latest
-        flyctl deploy --remote-only --image $DOCKER_HUB_USERNAME/svelte-manga:latest
+      run: flyctl deploy
       env:
-        DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-        DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      
