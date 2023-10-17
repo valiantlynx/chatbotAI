@@ -107,14 +107,14 @@ jobs:
       with:
         version: latest
     
-        
+
     - name: Build Docker image for fly
       run: |
-        docker build -t svelte-manga:latest .
-      working-directory: ./apps/svelte-manga
+        docker build -t svelte-manga:latest ./apps/svelte-manga
       env:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
     
+        
     - name: Deploy Animevariant
       run: |
         docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
