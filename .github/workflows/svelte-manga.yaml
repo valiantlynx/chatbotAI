@@ -64,8 +64,8 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
+        password: ${{ secrets.GHCR_PAT }}
+      
     - name: Docker meta
       id: docker_meta
       uses: docker/metadata-action@v3
