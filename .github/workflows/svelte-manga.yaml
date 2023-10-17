@@ -76,9 +76,7 @@ jobs:
         flavor: |
           latest=false
         tags: |
-          type=git-ref,ref=${{ github.ref }}
-          type=git-sha,ref=${{ github.sha }}
-          type=build-version,version=latest        
+          type=raw,ref=latest       
 
     - name: Build and tag Docker image and push to Docker Hub
       uses: docker/build-push-action@v2
