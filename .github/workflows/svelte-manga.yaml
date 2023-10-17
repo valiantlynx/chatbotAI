@@ -110,10 +110,12 @@ jobs:
 
     - name: Build Docker image for fly
       run: |
-        docker-compose -f docker-compose.yml up -d svelte-manga
+        docker network create valiantlynx-turborepo
+        COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build svelte-manga
       env:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
+        
     - name: Deploy Animevariant
       run: |
         docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
