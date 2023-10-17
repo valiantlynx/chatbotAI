@@ -12,24 +12,16 @@ services:
     networks:
       - valiantlynx-turborepo
 
-  next-web:
-    container_name: next-web
-    build:
-      context: .
-      dockerfile: ./apps/next-web/Dockerfile
-    restart: always
+  breath-first-search:
+    build: 
+      context: ./apps/breath-first-search/Dockerfile
     ports:
-      - 3002:3000
-    networks:
-      - valiantlynx-turborepo
-  express-api:
-    container_name: express-api
-    build:
-      context: .
-      dockerfile: ./apps/express-api/Dockerfile
+      - 8000:8000
+      - 5678:5678
+    volumes:
+      - .:/code
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
     restart: always
-    ports:
-      - 3001:3001
     networks:
       - valiantlynx-turborepo
 
