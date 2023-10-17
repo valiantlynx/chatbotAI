@@ -40,6 +40,7 @@ jobs:
       uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
+      id: buildx
       uses: docker/setup-buildx-action@v3
 
     - name: Cache Docker layers
@@ -71,37 +72,37 @@ jobs:
       with:
         images: |
           ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga
-          ghcr.io/${{ github.repository }}:${{ github.sha }}, ghcr.io/${{ github.repository }}:latest
+          ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga
         flavor: |
           latest=false
         tags: |
-          type=git-ref,ref=${{ github.ref }}
-          type=git-sha,ref=${{ github.sha }}
-          type=build-version,version=latest        
+          type=raw,value=latest       
 
     - name: Build and tag Docker image and push to Docker Hub
+      uses: docker/build-push-action@v2
       id: docker_build
-      run: |
-        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest .
-        docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
       with:
-        context: .
-        file: ./apps/svelte-manga/Dockerfile
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.docker_meta.outputs.tags }}
         labels: ${{ steps.docker_meta.outputs.labels }}
-    
+        builder: ${{ steps.buildx.outputs.name }}
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache
+        context: .
+        file: ./apps/svelte-manga/Dockerfile
+
     - name: Build and tag Docker image and push to GHCR
+      uses: docker/build-push-action@v2
       id: docker_build_ghcr
-      run: |
-        docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
-        docker tag ghcr.io/${{ github.repository }}:${{ github.sha }} ghcr.io/${{ github.repository }}:latest
       with:
-        context: .
-        file: ./apps/svelte-manga/Dockerfile
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.docker_meta.outputs.tags }}
         labels: ${{ steps.docker_meta.outputs.labels }}
+        builder: ${{ steps.buildx.outputs.name }}
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache
+        context: .
+        file: ./apps/svelte-manga/Dockerfile
 
     - name: Show image digest
       run: |
@@ -119,16 +120,5 @@ jobs:
       run: |
         docker manifest create ghcr.io/${{ github.repository }}:${{ github.sha }} ghcr.io/${{ github.repository }}:${{ github.sha }}
         docker manifest push ghcr.io/${{ github.repository }}:${{ github.sha }}
-
-
-    - name: Set up fly
-      uses: superfly/flyctl-actions/setup-flyctl@master
-      with:
-        version: latest
-
-    - name: Deploy Animevariant
-      run: flyctl deploy --remote-only --image ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
-      env:
-        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 # You can add more jobs, such as testing, linting, or other tasks.
