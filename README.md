@@ -201,3 +201,14 @@ This Turborepo has some additional tools already setup for you:
 - [ESLint](https://eslint.org/) for code linting
 - [Jest](https://jestjs.io) test runner for all things JavaScript
 - [Prettier](https://prettier.io) for code formatting
+
+
+
+
+# how to deploy to fly.io
+https://fly.io/docs/reference/monorepo/
+```flyctl auth login``` to login
+go to the root of the project
+```flyctl launch``` to create a new app
+```flyctl deploy --dockerfile ./apps/breath-first-search/Dockerfile``` to deploy. you can override the dockerfile to deploy a specific app the path is relative to the root of the repo. so might have change your dockerfile. rememter to change it back
+```flyctl open```

@@ -1,0 +1,17 @@
+# fly.toml app configuration file generated for monorepo on 2023-10-17T03:23:24+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "fly-builder-throbbing-sky-5531"
+primary_region = "arn"
+
+[env]
+  PORT = "3000"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
