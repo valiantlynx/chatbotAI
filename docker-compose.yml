@@ -13,13 +13,14 @@ services:
       - valiantlynx-turborepo
 
   breath-first-search:
-    build: 
-      context: ./apps/breath-first-search/Dockerfile
+    build:
+      context: ./apps/breath-first-search
+      dockerfile: Dockerfile  # Dockerfile is located within the context directory
     ports:
       - 8000:8000
       - 5678:5678
     volumes:
-      - .:/code
+      - ./apps/breath-first-search:/code
     command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
     restart: always
     networks:
