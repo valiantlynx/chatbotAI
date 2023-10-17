@@ -109,6 +109,6 @@ jobs:
 
     - name: Deploy Animevariant
       if: github.event_name != 'pull_request'
-      run: flyctl deploy --remote-only --image ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
+      run: flyctl deploy --remote-only --image ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest --app svelte-manga 
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
