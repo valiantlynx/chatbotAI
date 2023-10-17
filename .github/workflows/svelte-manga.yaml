@@ -71,8 +71,8 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: |
-          ${{ github.repository }}/svelte-manga
-          ghcr.io/${{ github.repository }}
+          ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga
+          ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga
         flavor: |
           latest=false
         tags: |
