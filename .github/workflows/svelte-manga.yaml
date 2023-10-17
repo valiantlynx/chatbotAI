@@ -1,0 +1,134 @@
+name: Animevariant
+
+run-name: ${{ github.actor }} is building svelte-manga 🚀
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'apps/svelte-manga/**'
+      - '.github/workflows/svelte-manga.yaml'
+      - 'packages/tsconfig/svelte.json'
+      - 'packages/general-config/**'
+      - 'packages/eslint-config-custom/svelte.js'
+      - 'packages/tailwind-config/**'
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - 'apps/svelte-manga/**'
+      - '.github/workflows/svelte-manga.yaml'
+      - 'packages/tsconfig/svelte.json'
+      - 'packages/general-config/**'
+      - 'packages/eslint-config-custom/svelte.js'
+      - 'packages/tailwind-config/**'
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build-and-push-images:
+    name: Build Animevariant
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    - name: Login to Docker Hub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+    - name: Login to GHCR
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Docker meta
+      id: docker_meta
+      uses: docker/metadata-action@v3
+      with:
+        images: |
+          ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga
+          ghcr.io/${{ github.repository }}:${{ github.sha }}, ghcr.io/${{ github.repository }}:latest
+        flavor: |
+          latest=false
+        tags: |
+          type=git-ref,ref=${{ github.ref }}
+          type=git-sha,ref=${{ github.sha }}
+          type=build-version,version=latest        
+
+    - name: Build and tag Docker image and push to Docker Hub
+      id: docker_build
+      run: |
+        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest .
+        docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
+      with:
+        context: .
+        file: ./apps/svelte-manga/Dockerfile
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.docker_meta.outputs.tags }}
+        labels: ${{ steps.docker_meta.outputs.labels }}
+    
+    - name: Build and tag Docker image and push to GHCR
+      id: docker_build_ghcr
+      run: |
+        docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
+        docker tag ghcr.io/${{ github.repository }}:${{ github.sha }} ghcr.io/${{ github.repository }}:latest
+      with:
+        context: .
+        file: ./apps/svelte-manga/Dockerfile
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.docker_meta.outputs.tags }}
+        labels: ${{ steps.docker_meta.outputs.labels }}
+
+    - name: Show image digest
+      run: |
+        echo ${{ steps.docker_build.outputs.digest }}
+        echo ${{ steps.docker_build_ghcr.outputs.digest }}
+
+    - name: Push manifest to Docker Hub
+      if: github.event_name != 'pull_request'
+      run: |
+        docker manifest create ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
+        docker manifest push ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
+    
+    - name: Push manifest to GHCR
+      if: github.event_name != 'pull_request'
+      run: |
+        docker manifest create ghcr.io/${{ github.repository }}:${{ github.sha }} ghcr.io/${{ github.repository }}:${{ github.sha }}
+        docker manifest push ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+
+    - name: Set up fly
+      uses: superfly/flyctl-actions/setup-flyctl@master
+      with:
+        version: latest
+
+    - name: Deploy Animevariant
+      run: flyctl deploy --remote-only --image ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+# You can add more jobs, such as testing, linting, or other tasks.
