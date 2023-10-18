@@ -38,7 +38,6 @@
 		"cheerio": "^1.0.0-rc.12",
 		"dotenv": "^16.3.1",
 		"fff-flavored-frontmatter": "1.1.0-alpha.0",
-
 		"gsap": "^3.12.2",
 		"lodash": "^4.17.21",
 		"pocketbase": "^0.16.0",

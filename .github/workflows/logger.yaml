@@ -27,6 +27,8 @@ jobs:
       - name: execute logger
         working-directory: packages/scripts/python/logger
         run: python logger.py
+        env:
+          HOST_URL: https://www.valiantlynx.com
 
       - name: commit files
         run: |
