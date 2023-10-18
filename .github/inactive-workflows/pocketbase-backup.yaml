@@ -13,23 +13,21 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: setup python
+        uses: actions/setup-python@v4
         with:
-            node-version: '14'
+          python-version: '3.9'
           
-
-      - name: Install dependencies
-        working-directory: packages/scripts/js/pocketbase-backup
-        run: npm install
+      - name: install python packages
+        working-directory: packages/scripts/python/pocketbase-backup
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
           
       - name: execute pocketbase-backup
-        working-directory: packages/scripts/js/pocketbase-backup
-        run: node pocketbase-backup.js
-        env:
-            POCKETBASE_URL: ${{ secrets.POCKETBASE_URL }}
-            POCKETBASE_ADMIN_EMAIL: ${{ secrets.POCKETBASE_EMAIL }}
-            POCKETBASE_ADMIN_PASSWORD: ${{ secrets.POCKETBASE_PASSWORD }}
+        working-directory: packages/scripts/python/pocketbase-backup
+        run: python pocketbase-backup.py
+          
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
