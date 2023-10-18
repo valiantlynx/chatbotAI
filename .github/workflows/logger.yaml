@@ -1,4 +1,4 @@
-name: pocketbase-backup
+name: logger
 
 on:
   schedule:
@@ -19,13 +19,13 @@ jobs:
           python-version: '3.9'
           
       - name: install python packages
-        working-directory: packages/scripts/python/pocketbase-backup
+        working-directory: packages/scripts/python/message-discord
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: execute pocketbase-backup
-        working-directory: packages/scripts/python/pocketbase-backup
+      - name: execute logger
+        working-directory: packages/scripts/python/message-discord
         run: python logger.py
           
       - name: commit files
