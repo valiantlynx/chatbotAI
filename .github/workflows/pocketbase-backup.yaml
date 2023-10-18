@@ -20,12 +20,12 @@ jobs:
           
 
       - name: Install dependencies
-        working-directory: packages/scripts/python/pocketbase-backup
+        working-directory: packages/scripts/js/pocketbase-backup
         run: npm install
           
       - name: execute pocketbase-backup
-        working-directory: packages/scripts/python/pocketbase-backup
-        run: python pocketbase-backup.py
+        working-directory: packages/scripts/js/pocketbase-backup
+        run: node pocketbase-backup.js
           
       - name: commit files
         run: |

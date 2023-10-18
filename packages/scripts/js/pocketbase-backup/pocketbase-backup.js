@@ -19,9 +19,11 @@ async function main() {
     await pb.admins.authWithPassword(adminEmail, adminPassword);
 
     // Create a new backup
-    await pb.backups.create('new_backup.zip');
+    const res = await pb.backups.create('new_backup.zip');
 
-    console.log('Backup created successfully.');
+    console.log('Backup created successfully.', res);
+
+
   } catch (error) {
     console.error('Error:', error);
   }
