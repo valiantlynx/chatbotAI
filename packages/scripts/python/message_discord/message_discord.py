@@ -34,4 +34,3 @@ class DiscordMessenger:
             print('Error sending message to discord.')
             print(response.status_code)
             print(response.text)
-
