@@ -1,33 +1,11 @@
-version: "3"
-
+version: '1.0'
 services:
-  svelte-manga:
-    container_name: svelte-manga
-    build:
-      context: .
-      dockerfile: ./apps/svelte-manga/Dockerfile
-    restart: always
-    ports:
-      - 3000:3000
-    networks:
-      - valiantlynx-turborepo
-
-  breath-first-search:
-    build:
-      context: ./apps/breath-first-search
-      dockerfile: Dockerfile  # Dockerfile is located within the context directory
+  fastapi:
+    build: .
     ports:
       - 8000:8000
       - 5678:5678
     volumes:
-      - ./apps/breath-first-search:/code
+      - .:/code
     command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
     restart: always
-    networks:
-      - valiantlynx-turborepo
-
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-networks:
-  valiantlynx-turborepo:
-    external: true

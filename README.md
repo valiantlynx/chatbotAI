@@ -1,230 +1,63 @@
-[![Lint Code Base](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/linter.yaml/badge.svg)](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/linter.yaml)
-[![breath-first-search](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/breath-first-search.yaml/badge.svg)](https://github.com/valiantlynx/valiantlynx-turborepo/actions/workflows/breath-first-search.yaml)
+# chatbotAI
+a bot i made right now it has very litle training materials. it reads what you write and from what it has learned answers back. it has only been trained if five types of resposes found in the form of a json file , look at the code
+the more types of anwers or in otherwords types of training materials in form of jaon file it has the smarter it gets
 
-# Turborepo Tailwind CSS starter
+# Requirements
+- docker
+- docker-compose
 
-This is an official starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-tailwind
+# where to get the data
+```bash	
+git clone https://github.com/valiantlynx/chatbotAI.git
+cd chatbotAI
 ```
 
-## What's inside?
 
-This Turborepo includes the following packages/apps:
+# Installation
+I am using big libraries like tensorflow and keras so it is better to use docker to run this project.
+i have included a docker-compose file to make it easier to run the project
+run: 
+```bash
+docker-compose up --build -d 
+``` 
+to run the project in the background.
 
-### Apps and Packages
+! you have to wait till the training is done.
+it will go through 400 epochs. you can check the progress by:
+```bash
+docker-compose logs
+```
+once you see logs like this:
+```bash
+chatbotai-fastapi-1  | Epoch 400/400
+ 1/87 [..............................] - ETA: 0s - loss: 0.0723 - accuracy: 1.0013/87 [===>..........................] - ETA: 0s - loss: 0.4671 - accuracy: 0.8430/87 [=========>....................] - ETA: 0s - loss: 0.6276 - accuracy: 0.8146/87 [==============>...............] - ETA: 0s - loss: 0.6012 - accuracy: 0.8261/87 [====================>.........] - ETA: 0s - loss: 0.6107 - accuracy: 0.8374/87 [========================>.....] - ETA: 0s - loss: 0.5939 - accuracy: 0.8387/87 [==============================] - 0s 4ms/step - loss: 0.6126 - accuracy: 0.8329
+chatbotai-fastapi-1  | /usr/local/lib/python3.11/site-packages/keras/src/engine/training.py:3079: UserWarning: You are saving your model as an HDF5 file via `model.save()`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')`.
+chatbotai-fastapi-1  |   saving_api.save_model(
+chatbotai-fastapi-1  | INFO:     Started server process [8]
+chatbotai-fastapi-1  | INFO:     Waiting for application startup.
+chatbotai-fastapi-1  | INFO:     Application startup complete.
+``` 
+its done.
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+go to http://localhost:8000/ to see the project running as well as the explanation of how it works
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Building packages/ui
-
-This example is setup to build `packages/ui` and output the transpiled source and compiled styles to `dist/`. This was chosen to make sharing one `tailwind.config.js` as easy as possible, and to ensure only the CSS that is used by the current application and its dependencies is generated.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update your `tailwind.config.js` to be aware of your package locations, so it can find all usages of the `tailwindcss` class names.
-
-For example, in [tailwind.config.js](packages/tailwind-config/tailwind.config.js):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/**/*.{js,ts,jsx,tsx}",
-  ],
+to stop the project run:
+```bash
+docker-compose down
 ```
 
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Turborepo Svelte starter
-
-This is an official starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-svelte
+docker-compose down will stop the project and remove the container. you might want to remove the images as well to save space on your computer. to do that run:
+```bash
+docker rmi chatbotai-fastapi 
 ```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [svelte-kit](https://kit.svelte.dev/) app
-- `web`: another [svelte-kit](https://kit.svelte.dev/) app
-- `ui`: a stub Svelte component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+after running docker-compose down
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Turborepo Docker starter
-
-This is an official Docker starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-docker
+# alternative installation
+i have not tested it as i made quick. if you dont have docker compose, run the file setup.sh. with:
+```bash
+bash setup.sh
 ```
-
-## What's inside?
-
-This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package manager. It includes the following packages/apps:
-
-### Apps and Packages
-
-- `web`: a [Next.js](https://nextjs.org/) app
-- `api`: an [Express](https://expressjs.com/) server
-- `ui`: ui: a React component library
-- `eslint-config-custom`: `eslint` configurations for client side applications (includes `eslint-config-next` and `eslint-config-prettier`)
-- `eslint-config-custom-server`: `eslint` configurations for server side applications (includes `eslint-config-next` and `eslint-config-prettier`)
-- `scripts`: Jest configurations
-- `logger`: Isomorphic logger (a small wrapper around console.log)
-- `tsconfig`: tsconfig.json;s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Docker
-
-This repo is configured to be built with Docker, and Docker compose. To build all apps in this repo:
-
-```
-# Create a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-docker network create valiantlynx-turborepo
-
-# Build prod using new BuildKit engine
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build
-
-# Start prod in detached mode
-docker-compose -f docker-compose.yml up -d
-```
-
-Open http://localhost:3000.
-
-To shutdown all running containers:
-
-```
-# Stop all running containers
-docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
-```
-
-### Remote Caching
-
-This example includes optional remote caching. In the Dockerfiles of the apps, uncomment the build arguments for `TURBO_TEAM` and `TURBO_TOKEN`. Then, pass these build arguments to your Docker build.
-
-You can test this behavior using a command like:
-
-`docker build -f apps/web/Dockerfile . --build-arg TURBO_TEAM=“your-team-name” --build-arg TURBO_TOKEN=“your-token“ --no-cache`
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
+though if you have docker i recommend using docker-compose as it is easier to run the project with it
 
 
-
-
-# how to deploy to fly.io
-https://fly.io/docs/reference/monorepo/
-```flyctl auth login``` to login
-go to the root of the project
-```flyctl launch``` to create a new app
-```flyctl deploy --dockerfile ./apps/breath-first-search/Dockerfile``` to deploy. you can override the dockerfile to deploy a specific app the path is relative to the root of the repo. so might have change your dockerfile. rememter to change it back
-```flyctl open```
-
-
-  - name: Set up fly
-      uses: superfly/flyctl-actions/setup-flyctl@master
-      with:
-        version: latest
-
-    - name: Deploy Animevariant
-      run: |
-        flyctl auth login -t ${{ secrets.FLY_API_TOKEN }}
-        flyctl deploy --remote-only --image ${{ secrets.DOCKER_HUB_USERNAME }}/svelte-manga:latest
-      env:
-        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
