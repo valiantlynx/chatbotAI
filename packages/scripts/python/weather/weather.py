@@ -1,9 +1,7 @@
 import requests
 import os
-import sys
 
-
-from ..message_discord.message_discord import DiscordMessenger
+from message_discord.message_discord import DiscordMessenger
 
 discord_webhook_url = os.environ['DISCORD_WEBHOOK_URL']
 
