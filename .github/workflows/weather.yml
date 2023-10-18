@@ -2,27 +2,26 @@
 name: weather
 
 on:
-    schedule:
-        - cron: '0 */3 * * *'
-    workflow_dispatch:
+  schedule:
+    - cron: "0 */3 * * *"
+  workflow_dispatch:
 
 jobs:
-    post_discord_message:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-python@v2
-              with:
-                  python-version: 3.8
-            - name: Install dependencies
-              working-directory: packages/scripts/python
-              run: |
-                  python -m pip install --upgrade pip
-                  pip install -r requirements.txt
-            - name: Run script
-              working-directory: packages/scripts/python
-              run: python main.py weather_discord_message
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-
+  post_discord_message:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        working-directory: packages/scripts/python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run script
+        working-directory: packages/scripts/python
+        run: python main.py weather_discord_message
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
