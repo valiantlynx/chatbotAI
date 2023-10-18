@@ -20,19 +20,19 @@ def issue_discord_message():
     # Create an instance of DiscordMessenger
     discord_messenger = DiscordMessenger(discord_webhook_url)
 
-    # Parse the JSON input
+    # Read the JSON input from stdin
     try:
-        issue_data = json.loads(sys.argv[1])
-        issue_type = sys.argv[2]
+        input_data = json.loads(sys.stdin.read())
+        issue_type = sys.argv[1]
     except json.JSONDecodeError:
-        issue_data = {}
+        input_data = {}
 
     # Extract issue details
-    title = issue_data.get('title', 'No title provided')
-    body = issue_data.get('body', 'No body provided')
-    user = issue_data.get('user', 'Unknown user')
-    avatar_url = issue_data.get('avatar_url', '')
-    html_url = issue_data.get('html_url', '')
+    title = input_data.get('title', 'No title provided')
+    body = input_data.get('body', 'No body provided')
+    user = input_data.get('user', 'Unknown user')
+    avatar_url = input_data.get('avatar_url', '')
+    html_url = input_data.get('html_url', '')
 
     # Use the issue details to create a custom message
     custom_message = f"Issue - **{title}**\n-Description: - {body}\nUser: **{user}**\n[Click Here]({html_url})"
@@ -54,6 +54,7 @@ def issue_discord_message():
         discord_messenger.send_info(message_data)
     else:
         discord_messenger.send_message(message_data)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run specific functions')

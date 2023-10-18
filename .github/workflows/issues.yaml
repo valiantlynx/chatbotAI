@@ -23,8 +23,8 @@ jobs:
             - name: Run script
               working-directory: packages/scripts/python
               run: |
-                    issue_data='{"title": "${{ github.event.issue.title }}", "body": "${{ github.event.issue.body }}", "user": "${{ github.event.issue.user.login }}", "avatar_url": "${{ github.event.issue.user.avatar_url }}", "html_url": "${{ github.event.issue.html_url }}"}'
-                    python main.py issue_discord_message "$issue_data" "${{ github.event.action }}"
+                issue_data='{"title": "${{ github.event.issue.title }}", "body": "${{ github.event.issue.body }}", "user": "${{ github.event.issue.user.login }}", "avatar_url": "${{ github.event.issue.user.avatar_url }}", "html_url": "${{ github.event.issue.html_url }}"}'
+                echo $issue_data | python main.py issue_discord_message -
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
