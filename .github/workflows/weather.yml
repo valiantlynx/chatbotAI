@@ -1,4 +1,4 @@
-name: issues
+name: weather
 
 on:
     schedule:
