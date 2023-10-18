@@ -59,3 +59,5 @@ i have not tested it as i made quick. if you dont have docker compose, run the f
 bash setup.sh
 ```
 though if you have docker i recommend using docker-compose as it is easier to run the project with it
+
+
