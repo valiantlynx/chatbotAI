@@ -26,7 +26,10 @@ jobs:
       - name: execute pocketbase-backup
         working-directory: packages/scripts/js/pocketbase-backup
         run: node pocketbase-backup.js
-          
+        env:
+            POCKETBASE_URL: ${{ secrets.POCKETBASE_URL }}
+            POCKETBASE_ADMIN_EMAIL: ${{ secrets.POCKETBASE_EMAIL }}
+            POCKETBASE_ADMIN_PASSWORD: ${{ secrets.POCKETBASE_PASSWORD }}
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
