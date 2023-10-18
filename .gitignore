@@ -37,3 +37,7 @@ dist/
 
 .dist
 .vscode
+
+# python
+__pycache__/
+tempCodeRunnerFile.py
