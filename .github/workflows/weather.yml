@@ -1,8 +1,9 @@
+---
 name: weather
 
 on:
     schedule:
-        - cron: '10 * * * *'
+        - cron: '0 */3 * * *'
     workflow_dispatch:
 
 jobs:
@@ -14,12 +15,12 @@ jobs:
               with:
                   python-version: 3.8
             - name: Install dependencies
-              working-directory: packages/scripts/python/message-discord
+              working-directory: packages/scripts/python/weather
               run: |
                   python -m pip install --upgrade pip
                   pip install -r requirements.txt
             - name: Run script
-              working-directory: packages/scripts/python/message-discord
+              working-directory: packages/scripts/python/weather
               run: |
                     issue_data='{"title": "${{ github.event.issue.title }}", "body": "${{ github.event.issue.body }}", "user": "${{ github.event.issue.user.login }}", "avatar_url": "${{ github.event.issue.user.avatar_url }}", "html_url": "${{ github.event.issue.html_url }}"}'
                     python weather.py "$issue_data" "${{ github.event.action }}"
